@@ -44,10 +44,11 @@ const MapComponent = () => {
   }, [mainData]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-        dispatch({ type: GET_MAIN_INFO });
-    }, 10000);
-    return () => clearInterval(interval);
+    dispatch({ type: GET_MAIN_INFO });
+    // const interval = setInterval(() => {
+    //     dispatch({ type: GET_MAIN_INFO });
+    // }, 10000);
+    // return () => clearInterval(interval);
   }, []);
 
   return (

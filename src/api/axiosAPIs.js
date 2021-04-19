@@ -33,3 +33,7 @@ export function updateJetPhotos(imageId) {
 export function deleteJetPhotos(imageId) {
   return axios.delete(URL + "jetPhotos/:" + imageId);
 }
+
+export function addJetPhotos(jetItem, icao) {
+    return axios.post(URL + `jetPhotos/:${icao}`, jetItem)
+}
