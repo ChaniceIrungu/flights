@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { DetailContainer } from "./styles";
 import AirplaneDeatilCard from "../components/DetailCardComponent/DetailCard";
 import { AirplaneItemDetailModel } from "../shared/interfaces";
 
@@ -19,9 +18,9 @@ const DetailsPage = () => {
   }, [airplaneDetail]);
   console.log("airplane", airplane);
   return (
-    <DetailContainer>
+    <div>
       {airplane && <AirplaneDeatilCard detailData={airplane} />}
-    </DetailContainer>
+    </div>
   );
 };
 

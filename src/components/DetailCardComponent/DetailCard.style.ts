@@ -1,19 +1,71 @@
 import styled from "styled-components";
 
-export const DetailBoxContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const ImageDeleteButton = styled.button`
+  cursor: pointer;
+  color: transparent;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  z-index: 100;
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const ImageSliderWrapper = styled.div`
+  .alice-carousel {
+    width: 300px;
+    height: 200px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover ${ImageDeleteButton} {
+      color: white;
+      opacity: 0.8;
+    }
+  }
+  .alice-carousel__wrapper {
+    width: 300px;
+    height: 200px;
+  }
+  .alice-carousel__stage-item {
+    width: 100% !important;
+  }
+  .alice-carousel__dots {
+    display: none;
+  }
+  .alice-carousel__prev-btn {
+    position: absolute;
+    width: auto;
+    left: 0;
+  }
+  .alice-carousel__next-btn {
+    position: absolute;
+    width: auto;
+    right: 0;
+  }
+  .alice-carousel__prev-btn-wrapper {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .alice-carousel__next-btn-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .alice-carousel__prev-btn-item, .alice-carousel__next-btn-item {
+    color: white;
+    padding: 0px;
+    opacity: initial;
+    font-size: 50px;
+    z-index: 50;
+  }
 `;
 
 export const DetailBox = styled.div`
   padding: 20px;
-  border: 1px solid #999999;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: flex-start;
 `;
 
@@ -34,27 +86,14 @@ export const DetailTitle = styled.span`
 `;
 
 export const ImageContainer = styled.div`
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 export const AirplaneImage = styled.img`
-    width: 200px;
-    height: 150px;
-`;
-
-export const ImageDeleteButton = styled.button`
-    width: 100%;
-    border: 1px solid #999999;
-    cursor: pointer;
-    margin-top: 10px;
-    padding: 5px 0px;
-    transition-duration: 0.2s;
-    background-color: white;
-    &:hover {
-        background-color: red;
-    }
-    &:focus {
-        outline: none;
-    }
+  width: 100%;
+  object-fit: cover;
 `;
