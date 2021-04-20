@@ -1,6 +1,7 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import * as airplaneActions from "../store/actionName/actionNames";
 import * as API from "../api/axiosAPIs";
+import { JetPhotos } from "../api-interfaces";
 
 function* getMainInfo(): Generator<any> {
   try {
@@ -10,6 +11,31 @@ function* getMainInfo(): Generator<any> {
     yield put({ type: "GET_MAIN_INFO_FETCH_FAILED" });
   }
 }
+
+function* getDetailInfo(action: any): Generator<any> {
+  try {
+    const detailOption: any = yield call(API.getJetPhotos);
+    // const airplaneImages: any = yield call(
+    //   API.getAirplaneImages,
+    //   action.payLoad.icao
+    // );
+    
+    const filteredData = detailOption.data.filter((e: JetPhotos) =>
+      e.airplane_icao.includes(action.payLoad.icao)
+    );
+    console.log("saga filtered Data", filteredData);
+
+    const airplaneDetail = {
+      details: action.payLoad,
+      airplaneImages: filteredData ? filteredData : [],
+    };
+    yield put({ type: "GET_DETAIL_INFO_FETCH", payLoad: airplaneDetail });
+  } catch (e) {
+    yield put({ type: "GET_DETAIL_INFO_FETCH_FAILED" });
+  }
+}
+
 export default function* mySaga() {
   yield takeEvery(airplaneActions.GET_MAIN_INFO, getMainInfo);
+  yield takeEvery(airplaneActions.GET_DETAIL_INFO, getDetailInfo);
 }

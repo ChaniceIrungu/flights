@@ -1,10 +1,9 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_MAIN_INFO } from "../../store/actionName/actionNames";
 import GoogleMapReact from "google-map-react";
 import Marker from "./Marker";
-import { google_map_key } from "../../config/googleMap";
+import { google_map_key } from "../../config/api";
 import { AllFlights } from "../../api-interfaces";
 import { MapContainer } from "./Marker.style";
 
@@ -44,10 +43,11 @@ const MapComponent = () => {
   }, [mainData]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-        dispatch({ type: GET_MAIN_INFO });
-    }, 10000);
-    return () => clearInterval(interval);
+    dispatch({ type: GET_MAIN_INFO });
+    // const interval = setInterval(() => {
+    //     dispatch({ type: GET_MAIN_INFO });
+    // }, 10000);
+    // return () => clearInterval(interval);
   }, []);
 
   return (
