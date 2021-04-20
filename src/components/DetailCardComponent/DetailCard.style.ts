@@ -53,13 +53,28 @@ export const ImageSliderWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
   }
-  .alice-carousel__prev-btn-item, .alice-carousel__next-btn-item {
+  .alice-carousel__prev-btn-item,
+  .alice-carousel__next-btn-item {
     color: white;
     padding: 0px;
     opacity: initial;
     font-size: 50px;
     z-index: 50;
   }
+`;
+
+export const ImageSection = styled.div`
+  width: 300px;
+  height: 200px;
+  border: 1px solid #999999;
+  display: flex;
+  justify-centent: center;
+  align-items: center;
+`;
+
+export const NoImageText = styled.p`
+  width: 100%;
+  text-align: center;
 `;
 
 export const DetailBox = styled.div`
@@ -82,7 +97,7 @@ export const DetailItem = styled.p`
 `;
 
 export const DetailTitle = styled.span`
-  font-weight: bold;
+  font-weight: 600;
 `;
 
 export const ImageContainer = styled.div`
