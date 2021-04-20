@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: GET_MAIN_INFO });
-  }, [])
+  }, [dispatch])
 
   return (
 

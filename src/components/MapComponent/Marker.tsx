@@ -19,14 +19,14 @@ const Marker = (props: any) => {
       baroAltitude: props.baroAltitude,
       velocity: props.velocity,
       direction: props.direction,
-    }
-    dispatch({ type: GET_DETAIL_INFO, payLoad: detailObject});
+    };
+    dispatch({ type: GET_DETAIL_INFO, payLoad: detailObject });
     history.push(routers.DETAILSPAGE);
-  }
+  };
   return (
     <div>
       <MapFlightMarker
-      onClick={() => goDetail()}
+        onClick={() => goDetail()}
         style={{
           backgroundImage: `url(${background})`,
           transform: `rotate(${props.direction}deg)`,

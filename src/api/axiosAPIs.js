@@ -1,8 +1,6 @@
 import axios from "axios";
+import { URL } from "../config/api";
 
-////////////////////APIS//////////
-
-const URL = "https://gentle-temple-27938.herokuapp.com/";
 
 // Get a two-dimensional array of airplanes that are currently in the air in mainland Portugal.
 export function getAllFlights() {
@@ -29,11 +27,17 @@ export function updateJetPhotos(imageId) {
   return axios.put(URL + "jetPhotos/:" + imageId);
 }
 
-// Request body params .
-export function deleteJetPhotos(imageId) {
-  return axios.delete(URL + "jetPhotos/:" + imageId);
-}
-
 export function addJetPhotos(jetItem, icao) {
-    return axios.post(URL + `jetPhotos/:${icao}`, jetItem)
+  jetItem.data
+    .forEach((element) => {
+      const newJetItem = {
+        username: element[1],
+        airplane_icao: icao,
+        airplane_image: element[0],
+      };
+      axios.post(URL + `jetPhotos/`, newJetItem);
+    })
+    .then(function() {
+      return axios.get(URL + "jetPhotos");
+    });
 }
