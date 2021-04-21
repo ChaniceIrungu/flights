@@ -31,6 +31,10 @@ export const ImageSliderWrapper = styled.div`
   }
   .alice-carousel__stage-item {
     width: 100% !important;
+    div {
+      width: 100%;
+      height: 100%;
+    }
   }
   .alice-carousel__dots {
     display: none;

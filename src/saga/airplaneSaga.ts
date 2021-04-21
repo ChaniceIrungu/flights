@@ -15,21 +15,38 @@ function* getMainInfo(): Generator<any> {
 function* getDetailInfo(action: any): Generator<any> {
   try {
     const detailOption: any = yield call(API.getJetPhotos);
-    // const airplaneImages: any = yield call(
-    //   API.getAirplaneImages,
-    //   action.payLoad.icao
-    // );
-    
+    const airplaneImages: any = yield call(
+      API.getAirplaneImages,
+      action.payLoad.icao
+    );
+
     const filteredData = detailOption.data.filter((e: JetPhotos) =>
       e.airplane_icao.includes(action.payLoad.icao)
     );
-    console.log("saga filtered Data", filteredData);
 
     const airplaneDetail = {
       details: action.payLoad,
       airplaneImages: filteredData ? filteredData : [],
     };
-    yield put({ type: "GET_DETAIL_INFO_FETCH", payLoad: airplaneDetail });
+
+    if (filteredData && filteredData.length !== 0) {
+      yield put({ type: "GET_DETAIL_INFO_FETCH", payLoad: airplaneDetail });
+    } else {
+      if (airplaneImages.data && airplaneImages.data.length !== 0) {
+        yield call(API.addJetPhotos, airplaneImages.data, action.payLoad);
+        const detailOptionNew: any = yield call(API.getJetPhotos);
+        const filteredDataNew = detailOptionNew.data.filter((e: JetPhotos) =>
+          e.airplane_icao.includes(action.payLoad.icao)
+        );
+        const airplaneDetailNew = {
+          details: action.payLoad,
+          airplaneImages: filteredDataNew,
+        };
+        yield put({ type: "GET_DETAIL_INFO_FETCH", payLoad: airplaneDetailNew });
+      } else {
+        yield put({ type: "GET_DETAIL_INFO_FETCH", payLoad: airplaneDetail });
+      }
+    }
   } catch (e) {
     yield put({ type: "GET_DETAIL_INFO_FETCH_FAILED" });
   }
