@@ -16,7 +16,6 @@ const DetailsPage = () => {
   useEffect(() => {
     airplaneDetail && setAirplane(airplaneDetail);
   }, [airplaneDetail]);
-  console.log("airplane", airplane);
   return (
     <div>
       {airplane && <AirplaneDeatilCard detailData={airplane} />}
